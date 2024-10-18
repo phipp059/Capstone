@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cooking - Meal Plan Generator</title>
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: hsl(30, 10%, 34%)">
+        <div class="container">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="cooking.html" class="nav-link active">Cooking</a>
+                </li>
+                <li class="nav-item">
+                    <a href="baking.html" class="nav-link">Baking</a>
+                </li>
+                <li class="nav-item">
+                    <a href="pickling.html" class="nav-link">Pickling</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Image Section -->
+    <div class="container-fluid p-0">
+        <img src="../Images/meal.jpg" alt="A beautifully presented multi-course meal" class="img-fluid w-100">
+    </div>
+
+    <!-- Informational Paragraph -->
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-md-8 offset-md-2 text-center">
+                <h1>Meal Plan Generator</h1>
+                <p>
+                    Need inspiration for your next meal? Use our meal plan generator to create a complete meal with an appetizer, entree, sides, and dessert. If you want to tweak any part of the menu, you can easily change individual courses to suit your preferences. Let this tool inspire your next delicious, multi-course dining experience!
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Meal Plan Generator Section -->
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <h2 class="text-center">Meal Plan Generator</h2>
+                <div class="text-center mb-3">
+                    <button class="btn btn-dark" onclick="generateMealPlan()">Generate Random Meal Plan</button>
+                </div>
+                
+                <div class="meal-plan">
+                    <div class="form-group">
+                        <label for="appetizer">Appetizer:</label>
+                        <select id="appetizer" class="form-control">
+                            <!-- Options will be populated by JavaScript -->
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="entree">Entree:</label>
+                        <select id="entree" class="form-control">
+                            <!-- Options will be populated by JavaScript -->
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="side1">Side Dish 1:</label>
+                        <select id="side1" class="form-control">
+                            <!-- Options will be populated by JavaScript -->
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="side2">Side Dish 2:</label>
+                        <select id="side2" class="form-control">
+                            <!-- Options will be populated by JavaScript -->
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dessert">Dessert:</label>
+                        <select id="dessert" class="form-control">
+                            <!-- Options will be populated by JavaScript -->
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sample meal options
+        const appetizers = ['Bruschetta', 'Caesar Salad', 'Stuffed Mushrooms', 'Caprese Salad', 'Deviled Eggs'];
+        const entrees = ['Grilled Salmon', 'Spaghetti Carbonara', 'Chicken Parmesan', 'Steak Frites', 'Vegetable Stir Fry'];
+        const sides = ['Mashed Potatoes', 'Roasted Vegetables', 'Garlic Bread', 'Rice Pilaf', 'Steamed Asparagus'];
+        const desserts = ['Tiramisu', 'Chocolate Mousse', 'Apple Pie', 'Cheesecake', 'Ice Cream Sundae'];
+
+        // Generate a random meal plan
+        function generateMealPlan() {
+            const randomAppetizer = appetizers[Math.floor(Math.random() * appetizers.length)];
+            const randomEntree = entrees[Math.floor(Math.random() * entrees.length)];
+            const randomSide1 = sides[Math.floor(Math.random() * sides.length)];
+            const randomSide2 = sides[Math.floor(Math.random() * sides.length)];
+            const randomDessert = desserts[Math.floor(Math.random() * desserts.length)];
+
+            populateMealOptions('appetizer', appetizers, randomAppetizer);
+            populateMealOptions('entree', entrees, randomEntree);
+            populateMealOptions('side1', sides, randomSide1);
+            populateMealOptions('side2', sides, randomSide2);
+            populateMealOptions('dessert', desserts, randomDessert);
+        }
+
+        // Populate dropdown options and set the randomly chosen option as the default
+        function populateMealOptions(selectId, optionsArray, selectedOption) {
+            const selectElement = document.getElementById(selectId);
+            selectElement.innerHTML = ''; // Clear any previous options
+
+            optionsArray.forEach(option => {
+                const optionElement = document.createElement('option');
+                optionElement.value = option;
+                optionElement.textContent = option;
+                if (option === selectedOption) {
+                    optionElement.selected = true; // Set the randomly chosen option as selected
+                }
+                selectElement.appendChild(optionElement);
+            });
+        }
+
+        // Initialize with a random meal plan when the page loads
+        window.onload = function() {
+            generateMealPlan();
+        };
+    </script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

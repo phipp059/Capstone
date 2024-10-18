@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pickling - Pickling Brine Calculator</title>
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: hsl(30, 10%, 34%)">
+        <div class="container">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="cooking.html" class="nav-link">Cooking</a>
+                </li>
+                <li class="nav-item">
+                    <a href="baking.html" class="nav-link">Baking</a>
+                </li>
+                <li class="nav-item">
+                    <a href="pickling.html" class="nav-link active">Pickling</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Image Section -->
+    <div class="container-fluid p-0">
+        <img src="../Images/pickles.jpg" alt="Jars of pickled vegetables" class="img-fluid w-100">
+    </div>
+
+    <!-- Informational Paragraph -->
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-md-8 offset-md-2 text-center">
+                <h1>The Art of Pickling</h1>
+                <p>
+                    Pickling is one of the simplest and most rewarding ways to preserve food. From cucumbers to carrots, pickling offers a delicious way to add tang and flavor to almost any vegetable. Not only does pickling extend the shelf life of your produce, but it also enhances the nutritional benefits by promoting gut health through fermentation.
+                    <br><br>
+                    Our pickling brine calculator makes it even easier by helping you create the perfect brine based on the weight of your vegetables. Enter the weight of your vegetables, and click "Calculate" to get the exact amounts of water, salt, sugar, and vinegar needed for your pickling brine.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pickling Brine Calculator Section -->
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <h2 class="text-center">Pickling Brine Calculator</h2>
+                <p class="text-center">Enter the weight of the vegetables you're pickling and click "Calculate".</p>
+
+                <!-- Input Section -->
+                <div class="form-group">
+                    <label for="vegetableWeight">Vegetable Weight (g):</label>
+                    <input type="number" id="vegetableWeight" class="form-control" placeholder="Enter weight of vegetables">
+                </div>
+
+                <!-- Calculate Button -->
+                <div class="text-center mb-3">
+                    <button class="btn btn-dark" onclick="calculatePicklingBrine()">Calculate</button>
+                </div>
+
+                <!-- Error Message -->
+                <p id="error-message" class="text-danger text-center"></p>
+
+                <!-- Results Section -->
+                <div class="results">
+                    <h3>Results:</h3>
+                    <p>Water: <span id="water">N/A</span>g</p>
+                    <p>Salt: <span id="salt">N/A</span>g</p>
+                    <p>Sugar: <span id="sugar">N/A</span>g</p>
+                    <p>Vinegar: <span id="vinegar">N/A</span>g</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Section -->
+    <script>
+        // Pickling brine percentages
+        const saltPercentage = 0.05;
+        const sugarPercentage = 0.03;
+        const vinegarPercentage = 0.50;
+        const waterPercentage = 0.42;
+
+        // Function to calculate pickling brine ingredients
+        function calculatePicklingBrine() {
+            const vegetableWeight = parseFloat(document.getElementById('vegetableWeight').value);
+            const errorMessage = document.getElementById('error-message');
+
+            // Error checking for negative or invalid values
+            if (isNaN(vegetableWeight) || vegetableWeight <= 0) {
+                errorMessage.textContent = 'Please enter a valid positive number for the vegetable weight.';
+                clearResults();
+                return;
+            }
+
+            // Clear error message
+            errorMessage.textContent = '';
+
+            // Calculations
+            const salt = vegetableWeight * saltPercentage;
+            const sugar = vegetableWeight * sugarPercentage;
+            const vinegar = vegetableWeight * vinegarPercentage;
+            const water = vegetableWeight * waterPercentage;
+
+            // Update the results on the page
+            document.getElementById('water').textContent = water.toFixed(2);
+            document.getElementById('salt').textContent = salt.toFixed(2);
+            document.getElementById('sugar').textContent = sugar.toFixed(2);
+            document.getElementById('vinegar').textContent = vinegar.toFixed(2);
+        }
+
+        // Function to clear results
+        function clearResults() {
+            document.getElementById('water').textContent = 'N/A';
+            document.getElementById('salt').textContent = 'N/A';
+            document.getElementById('sugar').textContent = 'N/A';
+            document.getElementById('vinegar').textContent = 'N/A';
+        }
+    </script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

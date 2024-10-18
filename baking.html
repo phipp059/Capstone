@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Baking - Bakers Math Calculator</title>
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: hsl(30, 10%, 34%)">
+        <div class="container">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="cooking.html" class="nav-link">Cooking</a>
+                </li>
+                <li class="nav-item">
+                    <a href="baking.html" class="nav-link active">Baking</a>
+                </li>
+                <li class="nav-item">
+                    <a href="pickling.html" class="nav-link">Pickling</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Image Section -->
+    <div class="container-fluid p-0">
+        <img src="../Images/bread.jpg" alt="Freshly baked bread" class="img-fluid w-100">
+    </div>
+
+    <!-- Informational Paragraph -->
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-md-8 offset-md-2 text-center">
+                <h1>The Joy of Bread Baking</h1>
+                <p>
+                    There is something truly magical about the process of baking bread. From the simple ingredients of flour, water, yeast, and salt comes a world of possibilities. Whether you're baking a crusty sourdough or a soft loaf of white bread, the art of bread baking connects us to a centuries-old tradition. Our bakers' math calculator will help you perfect your hydration and ingredient ratios to achieve the ideal loaf every time.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bakers Math Calculator Section -->
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <h2 class="text-center">Bakers Math Calculator</h2>
+                <p class="text-center">Enter the weight of the flour and click "Calculate" to see results for 65%, 75%, and 85% hydration levels.</p>
+
+                <!-- Input Section -->
+                <div class="form-group">
+                    <label for="flourWeight">Flour Weight (g):</label>
+                    <input type="number" id="flourWeight" class="form-control" placeholder="Enter flour weight">
+                </div>
+
+                <!-- Calculate Button -->
+                <div class="text-center mb-3">
+                    <button class="btn btn-dark" onclick="calculateBakersMath()">Calculate</button>
+                </div>
+
+                <!-- Error Message -->
+                <p id="error-message" class="text-danger text-center"></p>
+
+                <!-- Results Section -->
+                <div class="results">
+                    <h3>Results:</h3>
+
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h4>65% Hydration</h4>
+                            <p>Water: <span id="water65">N/A</span>g</p>
+                            <p>Salt: <span id="salt65">N/A</span>g</p>
+                            <p>Yeast: <span id="yeast65">N/A</span>g</p>
+                        </div>
+                    </div>
+
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h4>75% Hydration</h4>
+                            <p>Water: <span id="water75">N/A</span>g</p>
+                            <p>Salt: <span id="salt75">N/A</span>g</p>
+                            <p>Yeast: <span id="yeast75">N/A</span>g</p>
+                        </div>
+                    </div>
+
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h4>85% Hydration</h4>
+                            <p>Water: <span id="water85">N/A</span>g</p>
+                            <p>Salt: <span id="salt85">N/A</span>g</p>
+                            <p>Yeast: <span id="yeast85">N/A</span>g</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Section -->
+    <script>
+        // Baker's math percentages
+        const saltPercentage = 0.02;
+        const yeastPercentage = 0.01;
+
+        // Function to calculate bakers math for different hydration levels
+        function calculateBakersMath() {
+            const flourWeight = parseFloat(document.getElementById('flourWeight').value);
+            const errorMessage = document.getElementById('error-message');
+
+            // Error checking for negative or invalid values
+            if (isNaN(flourWeight) || flourWeight <= 0) {
+                errorMessage.textContent = 'Please enter a valid positive number for the flour weight.';
+                clearResults();
+                return;
+            }
+
+            // Clear error message
+            errorMessage.textContent = '';
+
+            // Hydration percentages
+            const hydration65 = 0.65;
+            const hydration75 = 0.75;
+            const hydration85 = 0.85;
+
+            // Calculations for each hydration level
+            const water65 = flourWeight * hydration65;
+            const salt65 = flourWeight * saltPercentage;
+            const yeast65 = flourWeight * yeastPercentage;
+
+            const water75 = flourWeight * hydration75;
+            const salt75 = flourWeight * saltPercentage;
+            const yeast75 = flourWeight * yeastPercentage;
+
+            const water85 = flourWeight * hydration85;
+            const salt85 = flourWeight * saltPercentage;
+            const yeast85 = flourWeight * yeastPercentage;
+
+            // Update the results on the page
+            document.getElementById('water65').textContent = water65.toFixed(2);
+            document.getElementById('salt65').textContent = salt65.toFixed(2);
+            document.getElementById('yeast65').textContent = yeast65.toFixed(2);
+
+            document.getElementById('water75').textContent = water75.toFixed(2);
+            document.getElementById('salt75').textContent = salt75.toFixed(2);
+            document.getElementById('yeast75').textContent = yeast75.toFixed(2);
+
+            document.getElementById('water85').textContent = water85.toFixed(2);
+            document.getElementById('salt85').textContent = salt85.toFixed(2);
+            document.getElementById('yeast85').textContent = yeast85.toFixed(2);
+        }
+
+        // Function to clear results
+        function clearResults() {
+            document.getElementById('water65').textContent = 'N/A';
+            document.getElementById('salt65').textContent = 'N/A';
+            document.getElementById('yeast65').textContent = 'N/A';
+            document.getElementById('water75').textContent = 'N/A';
+            document.getElementById('salt75').textContent = 'N/A';
+            document.getElementById('yeast75').textContent = 'N/A';
+            document.getElementById('water85').textContent = 'N/A';
+            document.getElementById('salt85').textContent = 'N/A';
+            document.getElementById('yeast85').textContent = 'N/A';
+        }
+    </script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
